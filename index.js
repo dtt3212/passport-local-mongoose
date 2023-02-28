@@ -295,7 +295,9 @@ module.exports = function (schema, options) {
     }
 
     if (cb) {
-      query.exec(cb);
+      query.exec()
+        .catch(err => cb(err, null))  
+        .then(value => cb(null, value));
       return;
     }
 
